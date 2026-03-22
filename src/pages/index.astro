@@ -1,0 +1,203 @@
+---
+import '../styles/global.css';
+import HeroCard from '../components/HeroCard';
+import AboutCard from '../components/AboutCard';
+import SkillsCard from '../components/SkillsCard';
+import ExperienceCard from '../components/ExperienceCard';
+import EducationCard from '../components/EducationCard';
+import ContactCard from '../components/ContactCard';
+import StatsCard from '../components/StatsCard';
+import FocusCard from '../components/FocusCard';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Portafolio de Carlos Rodríguez — Desarrollador Full Stack con orientación al backend. JavaScript, TypeScript, Java, Node.js, Spring Boot." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Carlos Rodríguez — Full Stack Dev</title>
+  </head>
+  <style>
+    /* Responsive grid spans */
+    .col-hero   { grid-column: span 7; }
+    .col-about  { grid-column: span 5; }
+    .col-stats  { grid-column: span 4; }
+    .col-quote  { grid-column: span 8; }
+    .col-full   { grid-column: span 12; }
+    .col-exp    { grid-column: span 8; }
+    .col-edu    { grid-column: span 4; }
+    .col-focus  { grid-column: span 8; }
+    .col-contact{ grid-column: span 4; }
+    .col-footer { grid-column: span 12; }
+
+    @media (max-width: 1024px) {
+      .col-hero, .col-about, .col-stats, .col-quote,
+      .col-exp, .col-edu, .col-focus, .col-contact { grid-column: span 6; }
+      .col-full, .col-footer { grid-column: span 6; }
+    }
+
+    @media (max-width: 640px) {
+      .col-hero, .col-about, .col-stats, .col-quote,
+      .col-full, .col-exp, .col-edu, .col-focus, .col-contact, .col-footer {
+        grid-column: span 1;
+      }
+    }
+
+    /* SkillsCard inner grid collapse */
+    @media (max-width: 768px) {
+      .skills-cats { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 480px) {
+      .skills-cats { grid-template-columns: 1fr !important; }
+    }
+  </style>
+  <body>
+
+    <!-- Top nav bar -->
+    <header style="
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,11,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+    ">
+      <span style="font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em;">
+        cr<span style="color: var(--accent);">.</span>dev
+      </span>
+      <nav style="display: flex; gap: 24px; align-items: center;">
+        <a href="#experiencia" style="font-family: var(--font-display); font-size: 11px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s;"
+          onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Experiencia</a>
+        <a href="#contacto" style="font-family: var(--font-display); font-size: 11px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s;"
+          onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Contacto</a>
+        <a href="mailto:cn.rodriguez@outlook.com" style="
+          font-family: var(--font-display);
+          font-size: 11px;
+          color: var(--bg);
+          background: var(--accent);
+          padding: 6px 14px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          transition: background 0.2s;
+        "
+          onmouseover="this.style.background='var(--accent-dim)'" onmouseout="this.style.background='var(--accent)'">
+          Contratar
+        </a>
+      </nav>
+    </header>
+
+    <!-- Main Bento Grid -->
+    <main>
+      <div class="bento-grid">
+
+        <!-- Row 1: Hero (7 cols) + About (5 cols) -->
+        <div class="col-hero">
+          <HeroCard client:load />
+        </div>
+        <div class="col-about">
+          <AboutCard client:load />
+        </div>
+
+        <!-- Row 2: Stats (4 cols) + Quote (8 cols) -->
+        <div class="col-stats">
+          <StatsCard client:load />
+        </div>
+        <!-- Quote accent card -->
+        <div class="card reveal delay-3 col-quote" style="
+          padding: 32px 36px;
+          background: linear-gradient(120deg, #0d1a0d 0%, #111113 60%, #1a1012 100%);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 10px;
+          overflow: hidden;
+          position: relative;
+        ">
+          <!-- decorative circles -->
+          <div style="
+            position: absolute;
+            right: -60px; top: -60px;
+            width: 220px; height: 220px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,255,135,0.06);
+            pointer-events: none;
+          "></div>
+          <div style="
+            position: absolute;
+            right: -30px; top: -30px;
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,255,135,0.1);
+            pointer-events: none;
+          "></div>
+          <span class="label">Filosofía de trabajo</span>
+          <blockquote style="
+            font-family: var(--font-body);
+            font-size: clamp(17px, 2vw, 22px);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--text-primary);
+            line-height: 1.5;
+            border: none;
+            padding: 0;
+            max-width: 600px;
+          ">
+            "El código más valioso no es el que hace lo nuevo,<br/>
+            sino el que repara lo que nadie más entendía."
+          </blockquote>
+          <span style="font-family: var(--font-display); font-size: 11px; color: var(--accent); letter-spacing: 0.08em;">— Carlos Rodríguez</span>
+        </div>
+
+        <!-- Row 3: Skills full width -->
+        <div class="col-full" id="skills">
+          <SkillsCard client:load />
+        </div>
+
+        <!-- Row 4: Experience (8) + Education (4) -->
+        <div class="col-exp" id="experiencia">
+          <ExperienceCard client:load />
+        </div>
+        <div class="col-edu">
+          <EducationCard client:load />
+        </div>
+
+        <!-- Row 5: Focus areas (8) + Contact (4) -->
+        <div class="col-focus" id="focus">
+          <FocusCard client:load />
+        </div>
+        <div class="col-contact" id="contacto">
+          <ContactCard client:load />
+        </div>
+
+        <!-- Footer row -->
+        <div class="col-footer" style="
+          padding: 20px 4px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-top: 1px solid var(--border);
+        ">
+          <span style="font-family: var(--font-display); font-size: 11px; color: var(--text-muted);">
+            © 2026 Carlos Rodríguez · Coquimbo, Chile
+          </span>
+          <span style="font-family: var(--font-display); font-size: 11px; color: var(--text-muted);">
+            Construido con <span style="color: var(--accent);">Astro</span> + <span style="color: var(--accent);">React</span>
+          </span>
+        </div>
+
+      </div>
+    </main>
+
+  </body>
+</html>
